@@ -147,7 +147,7 @@ def check_shell(shell: str) -> None:
         None
     '''
     if shell and ("'" in shell or '"' in shell):
-        print('[-] Error: The value specified by --shell cannot contain quotes.')
+        print('[ROFLCOPTER] Error: The value specified by --shell cannot contain quotes.')
         sys.exit(1)
 
 
@@ -285,7 +285,7 @@ class Webshell:
             key, value = spec.split('=', 1)
 
         except ValueError:
-            return f'[-] The specified variable defintion is invalid: {cmd}'
+            return f'[ROFLCOPTER] The specified variable defintion is invalid: {cmd}'
 
         if value:
             self.env[key] = value
@@ -370,7 +370,7 @@ class Webshell:
             raise InternalError('eval was called despite !eval not used.')
 
         if self.type != 'php':
-            return '[-] !eval can only be used in a php shell.'
+            return '[ROFLCOPTER] !eval can only be used in a php shell.'
 
         _, path = cmd.split(' ', 1)
         path = pathlib.Path(path)
@@ -380,7 +380,7 @@ class Webshell:
             content = content.strip('<?php|<?|?>')
 
         except Exception:
-            return f'[-] Unable to read local file {path.absolute()}.'
+            return f'[ROFLCOPTER] Unable to read local file {path.absolute()}.'
 
         data = {
                  Webshell.action: Webshell.eval_action,
@@ -438,10 +438,10 @@ class Webshell:
             (lfile, rfile) = self.get_files(cmd, pathlib.Path, self.path_func)
 
         except ValueError:
-            return '[-] !upload <lfile> <rfile>'
+            return '[ROFLCOPTER] !upload <lfile> <rfile>'
 
         if not lfile.is_file():
-            return f'[-] Local file {lfile} does not exist'
+            return f'[ROFLCOPTER] Local file {lfile} does not exist'
 
         if not rfile.is_absolute():
             rfile = self.path.joinpath(rfile)
@@ -480,7 +480,7 @@ class Webshell:
             (rfile, lfile) = self.get_files(cmd, self.path_func, pathlib.Path)
 
         except ValueError:
-            return '[-] !download <rfile> <lfile>'
+            return '[ROFLCOPTER] !download <rfile> <lfile>'
 
         if not rfile.is_absolute():
             rfile = self.path.joinpath(rfile)
@@ -503,10 +503,10 @@ class Webshell:
                 return f'[+] Saved {len(content)} Bytes to {lfile.absolute()}.'
 
             else:
-                return '[-] Skipping download of empty (probably not existing) file.'
+                return '[ROFLCOPTER] Skipping download of empty (probably not existing) file.'
 
         except Exception:
-            return f'[-] Unable to write file {lfile.absolute()}.'
+            return f'[ROFLCOPTER] Unable to write file {lfile.absolute()}.'
 
     def get_values(self, data: str, count: int, decode: bool = False, path: bool = True) -> list:
         '''
@@ -593,7 +593,7 @@ class Webshell:
         length = len(split)
 
         if length < 2:
-            raise ValueError('[-] Syntax error.')
+            raise ValueError('[ROFLCOPTER] Syntax error.')
 
         if length == 2:
             file1 = path_func1(split[1])
@@ -636,24 +636,24 @@ class Webshell:
                 print_result(result)
 
             except KeyboardInterrupt:
-                print('[-] Aborted.')
+                print('[ROFLCOPTER] Aborted.')
 
             except ParameterCountException:
-                print('[-] Server response contained an unexpected amount of parameters.')
+                print('[ROFLCOPTER] Server response contained an unexpected amount of parameters.')
 
             except (ValueError, InvalidDirectoryException) as e:
-                print(f'[-] {e}')
+                print(f'[ROFLCOPTER] {e}')
 
             except ServerError as e:
-                print('[-] The specified action caused an server error.')
-                print(f'[-] Error: {e}')
+                print('[ROFLCOPTER] The specified action caused an server error.')
+                print(f'[ROFLCOPTER] Error: {e}')
 
             except EOFError:
-                print('[-] EOF.')
+                print('[ROFLCOPTER] EOF.')
                 sys.exit(1)
 
             except InternalError as e:
-                print(f'[-] An internal error occured: {e}')
+                print(f'[ROFLCOPTER] An internal error occured: {e}')
                 sys.exit(1)
 
     def handle_cmd(self, cmd: str) -> str:
@@ -721,28 +721,28 @@ try:
     webshell.cmd_loop(history)
 
 except ServerError as e:
-    print(f'[-] Caught ServerError. Webshell at {args.url} is not functional.')
-    print(f'[-] Error: {e}')
+    print(f'[ROFLCOPTER] Caught ServerError. Webshell at {args.url} is not functional.')
+    print(f'[ROFLCOPTER] Error: {e}')
 
 except ParameterCountException:
-    print('[-] Server response contained an unexpected amount of parameters.')
-    print(f'[-] Webshell at {args.url} is not functional.')
+    print('[ROFLCOPTER] Server response contained an unexpected amount of parameters.')
+    print(f'[ROFLCOPTER] Webshell at {args.url} is not functional.')
 
 except IsADirectoryError as e:
-    print('[-] The specified filename is an existing directory:')
-    print(f'[-] {e}')
+    print('[ROFLCOPTER] The specified filename is an existing directory:')
+    print(f'[ROFLCOPTER] {e}')
 
 except PermissionError as e:
-    print('[-] Insufficient permissions to access the specified resource:')
-    print(f'[-] {e}')
+    print('[ROFLCOPTER] Insufficient permissions to access the specified resource:')
+    print(f'[ROFLCOPTER] {e}')
 
 except FileNotFoundError as e:
-    print('[-] The specified file (or parent directory) was not found:')
-    print(f'[-] {e}')
+    print('[ROFLCOPTER] The specified file (or parent directory) was not found:')
+    print(f'[ROFLCOPTER] {e}')
 
 except (ValueError, InvalidProtocolException) as e:
-    print(f'[-] {e}')
+    print(f'[ROFLCOPTER] {e}')
 
 except requests.exceptions.ConnectionError as e:
-    print('[-] Cannot connect to the specified target:')
-    print(f'[-] {e}')
+    print('[ROFLCOPTER] Cannot connect to the specified target:')
+    print(f'[ROFLCOPTER] {e}')
