@@ -544,11 +544,7 @@ env var
 
     def get_response(response: requests.Response, action: str) -> str:
         '''
-        Extracts the HTTP response text and handles some common errors.
-        The status code 202 is expected to be returned if the requested
-        directory does not exist on the server side. It is required to choose
-        a non-error HTTP status for this purpose, as in the case of HTTP
-        error status codes, the response text is sometimes supressed.
+    http response tomfoolery
 
         Parameters:
             response    HTTP response to a roflcopter request
