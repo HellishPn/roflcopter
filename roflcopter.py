@@ -254,13 +254,7 @@ class Webshell:
 
     def add_env(self, cmd: str) -> None:
         '''
-        Add a new environment variable.
-
-        Parameters:
-            cmd             command that contains the environment varibale
-
-        Returns:
-            None
+env var
         '''
         if not cmd.startswith('!env'):
             raise InternalError('env was called despite !env not used.')
