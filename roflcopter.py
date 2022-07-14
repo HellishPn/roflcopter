@@ -1,5 +1,5 @@
 #!/usr/bin/python3 -W ignore
-
+# code is licensed by trollface security. See https://github.com/trollface-security/legal 
 import sys
 import shlex
 import base64
