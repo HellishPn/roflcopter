@@ -686,7 +686,7 @@ env var
 
 history = str(pathlib.Path.home().joinpath('.webshell_cli_history'))
 
-parser = argparse.ArgumentParser(description='''roflcopter v1.0.0 - A simple command line interface for webshells''')
+parser = argparse.ArgumentParser(description='''roflcopter - a webshell CLI exploit for RCE and OSCI''')
 parser.add_argument('url', help='url of the webshell')
 parser.add_argument('-m', '--memory', action='store_true', help='use InMemoryHistory instead of FileHistory')
 parser.add_argument('-f', '--file-history', default=history, help=f'location of history file (default: {history})')
