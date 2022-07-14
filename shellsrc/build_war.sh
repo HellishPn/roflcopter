@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# update sh
 if ! command -v jar &> /dev/null; then
     echo "[-] Error: Cannot find the jar command on your system."
     exit 1
